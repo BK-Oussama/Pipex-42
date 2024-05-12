@@ -6,7 +6,7 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:21:50 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/05/12 12:30:12 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/05/12 13:58:01 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void first_child(char **argv, char **env, int *fd)
     infile = open(argv[1], O_RDONLY, 0644);
     if (infile < 0)
     {
-        perror("fd infile error");
+        perror("fd infile error!");
         exit(EXIT_FAILURE);
     }
     
