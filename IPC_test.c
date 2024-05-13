@@ -6,7 +6,7 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 08:16:52 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/05/11 19:38:46 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:32:23 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "./libft/libft.h"
 
 /*
     These values are always used for stdin , stdout, and stderr:
@@ -28,38 +29,75 @@
     and then i did realize that the child will excute the else if (pid == 00) and the return success,
     the parent process wil excute the else block and then exit with success. 
 */
-int main()
-{
-    int pid;
-    int pfd[2];
 
-    pipe(pfd);
-    pid = fork();
-    if (pid < 0)
+static void retrive_paths(char **env)
+{
+    int     i;
+    char    *c = NULL;
+    char    **paths;
+    
+    i = 0;
+    while (env[i])
     {
-        fprintf(stderr, "fork failed\n");
-        return 1;
+        if (ft_strnstr(env[i], "PATH", 4))
+        {
+            c = ft_strnstr(env[i], "PATH", 4);
+            break;
+        }
+        i++;
     }
-    else if (pid == 0)
+    if (c == NULL)
     {
-        close(pfd[0]);
-        dup2(pfd[1], 1);
-        close(pfd[1]);     
-        write(1, "This message from child to pop!", 31);
-        exit(EXIT_SUCCESS);
+        perror ("Pipex: zzzzzzzzzzzzzz");
+        exit(EXIT_FAILURE);
     }
-    else
-    {
-        close(pfd[1]);
-        dup2(pfd[0], 0);
-        close (pfd[0]);
-        char str[31];
-        read(0, str, 31);
-        printf("Parent received:\t%s\n%d", str, getpid());
-        wait (NULL);
-    }
-    return (EXIT_SUCCESS);
+    else if (c != NULL)
+        paths = ft_split(c + 5, ':');
+    
+ 
 }
+
+int main(int argc, char **argv, char **env)
+{
+    retrive_paths(env);
+    return 0;
+}
+
+
+
+
+// int main()
+// {
+//     int pid;
+//     int pfd[2];
+
+//     pipe(pfd);
+//     pid = fork();
+//     if (pid < 0)
+//     {
+//         fprintf(stderr, "fork failed\n");
+//         return 1;
+//     }
+//     else if (pid == 0)
+//     {
+//         close(pfd[0]);
+//         dup2(pfd[1], 1);
+//         close(pfd[1]);     
+//         write(1, "This message from child to pop!", 31);
+//         exit(EXIT_SUCCESS);
+//     }
+//     else
+//     {
+//         close(pfd[1]);
+//         dup2(pfd[0], 0);
+//         close (pfd[0]);
+//         char str[31];
+//         read(0, str, 31);
+//         printf("Parent received:\t%s\n%d", str, getpid());
+//         wait (NULL);
+//     }
+//     return (EXIT_SUCCESS);
+// }
 
 // #include <unistd.h>
 // #include <stdio.h>

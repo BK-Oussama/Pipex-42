@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ouboukou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:38:57 by ouboukou          #+#    #+#             */
-/*   Updated: 2023/12/25 17:29:42 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:27:15 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ char	**ft_split(char const *s, char c)
 {
 	char	**new_str;
 	size_t	count;
-
+	if (s == NULL)
+		return (NULL);
 	count = count_words(s, c);
 	new_str = malloc((count + 1) * sizeof(char *));
-	if (new_str == NULL || s == NULL)
+	if (new_str == NULL)
 		return (NULL);
 	one_more_line(s, c, new_str, count);
 	if (new_str == NULL)
