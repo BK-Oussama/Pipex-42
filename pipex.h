@@ -13,12 +13,12 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <fcntl.h>
-#include "./libft/libft.h"
+# include "./libft/libft.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
 /* functions */
 
@@ -27,8 +27,6 @@
 // char	*ft_strjoin(const char *s1, const char *s2);
 // size_t	ft_strlen(const char *s)
 
-
-//check on how to use libft to be compiled to a lib befor proceden on making the pipex program 
-
+// check on how to use libft to be compiled to a lib befor proceden on making the pipex program
 
 #endif
