@@ -6,7 +6,7 @@
 /*   By: boukoutaya <boukoutaya@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:21:50 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/05/13 22:21:55 by boukoutaya       ###   ########.fr       */
+/*   Updated: 2024/05/14 21:26:10 by boukoutaya       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	check_cmd_access(char *paths[], char *argv)
 
 static void	retrive_paths(char **env, char *argv)
 {
-	int		i;
 	char	*c;
 	char	**paths;
 

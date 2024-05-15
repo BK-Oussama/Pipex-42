@@ -1,32 +1,36 @@
 # Define compiler
 CC = cc
 
+
+# YOU NOW NEED TO ADD THE LAST FILE YOU HAVE ADDED FT_FREE.
+
 # Define CFLAGS (compiler flags)
 CFLAGS = -Wall -Wextra -Werror
 
 # Source code files
-SRCs = ft_conversion.c ft_decimal_to_hexa.c ft_print_address.c ft_printf.c ft_putchar.c ft_putnbr.c ft_putstr.c ft_put_unsigned_nbr.c ft_strlen.c 
-
-# Object files (built from source code)
-OBJs = ft_conversion.o ft_decimal_to_hexa.o ft_print_address.o ft_printf.o ft_putchar.o ft_putnbr.o ft_putstr.o ft_put_unsigned_nbr.o ft_strlen.o
+SRCs = pipex.c
+Libft = libft/libft.a
 
 # Executable name
-NAME = libftprintf.a
+NAME = pipex
 
 # Main target (to build the executable)
 all: $(NAME)
 
 # How to build the executable
-$(NAME): $(OBJs)
-	ar rcs $(NAME) $(OBJs)
+$(NAME): $(SRCs)
+	make -C libft
+	$(CC) $(CFLAGS) $(SRCs) $(Libft) -o $(NAME)
 
 # Target to clean up object files
-clean: 
-	rm -f $(OBJs)
+clean:
+	rm -f $(NAME)
+	make clean -C libft
 
 # Target to clean up object files & the executable
 fclean: clean
 	rm -f $(NAME)
+	make fclean -C libft
 
 # Rebuild everything (clean first, then build)
 re: fclean all

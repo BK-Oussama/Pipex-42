@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ouboukou <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: boukoutaya <boukoutaya@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/17 19:38:13 by ouboukou          #+#    #+#              #
-#    Updated: 2023/12/17 23:21:48 by ouboukou         ###   ########.fr        #
+#    Updated: 2024/05/14 21:13:45 by boukoutaya       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ B_SRCs = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast
 
 B_OBJs = ft_lstnew_bonus.o ft_lstadd_front_bonus.o ft_lstsize_bonus.o ft_lstlast_bonus.o ft_lstadd_back_bonus.o ft_lstdelone_bonus.o
 
-NAME = ../libft.a
+NAME = libft.a
 
 all: $(NAME)
 
