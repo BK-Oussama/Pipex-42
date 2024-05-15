@@ -1,14 +1,11 @@
 # Define compiler
 CC = cc
 
-
-# YOU NOW NEED TO ADD THE LAST FILE YOU HAVE ADDED FT_FREE.
-
 # Define CFLAGS (compiler flags)
 CFLAGS = -Wall -Wextra -Werror
 
 # Source code files
-SRCs = pipex.c
+SRCs = pipex.c pipex_utils.c 
 Libft = libft/libft.a
 
 # Executable name

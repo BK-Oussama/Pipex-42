@@ -44,7 +44,7 @@ static void	ft_free(char **s)
 	free(s);
 }
 
-static char	**one_more_line(char const*s, char c, char **str, size_t count)
+static char	**one_more_line(char const *s, char c, char **str, size_t count)
 {
 	size_t	start;
 	size_t	end;
@@ -76,6 +76,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**new_str;
 	size_t	count;
+
 	if (s == NULL)
 		return (NULL);
 	count = count_words(s, c);

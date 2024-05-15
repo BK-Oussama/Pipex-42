@@ -3,32 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boukoutaya <boukoutaya@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:21:50 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/05/14 21:26:10 by boukoutaya       ###   ########.fr       */
+/*   Updated: 2024/05/15 19:24:21 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-void	ft_free(char **s)
-{
-	int	i;
 
-	i = 0;
-	while ((s[i]))
-	{
-		free(s[i]);
-		i++;
-	}
-	free(s);	
-}
 static void	check_cmd_access(char *paths[], char *argv)
 {
 	int		i;
 	char	*c;
 	char	**cmd_args;
 	char	*temp;
+
 	cmd_args = ft_split(argv, ' ');
 	if (!cmd_args)
 		ft_putstr_fd("Pipex: ft_split failed", 2);
@@ -40,14 +30,14 @@ static void	check_cmd_access(char *paths[], char *argv)
 		c = ft_strjoin(c, cmd_args[0]);
 		if (access(c, F_OK | X_OK) == 0)
 			execve(c, cmd_args, NULL);
-
 		free(c);
 		free(temp);
 		i++;
 	}
 	ft_free(cmd_args);
 	ft_free(paths);
-	(perror(""), exit(127));
+	ft_putstr_fd("Error: command not found\n", 2);
+	exit(127);
 }
 
 static void	retrive_paths(char **env, char *argv)
@@ -66,7 +56,7 @@ static void	retrive_paths(char **env, char *argv)
 		env++;
 	}
 	if (c == NULL)
-		ft_putstr_fd("Pipex: There is no $PATH", 2);
+		ft_putstr_fd("Pipex: There is no $PATH\n", 2);
 	paths = ft_split(c + 5, ':');
 	if (!paths)
 		ft_putstr_fd("Pipex: ft_split failed", 2);
@@ -107,7 +97,7 @@ static void	second_child(char **argv, char **env, int *fd)
 	close(outfile);
 	close(fd[0]);
 	close(fd[1]);
-	if (ft_strchr(argv[3], '/') != NULL && access(argv[2], F_OK | X_OK) == 0)
+	if (ft_strchr(argv[3], '/') != NULL && access(argv[3], F_OK | X_OK) == 0)
 	{
 		cmd_args = ft_split(argv[3], ' ');
 		execve(cmd_args[0], cmd_args, NULL);
@@ -140,6 +130,5 @@ int	main(int argc, char *argv[], char *env[])
 		second_child(argv, env, pipe_fd);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
-	waitpid(0, NULL, 0);
-	return (EXIT_SUCCESS);
+	check_child_exit_status(child_01, child_02);
 }
