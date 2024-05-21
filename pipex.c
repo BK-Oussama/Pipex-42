@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-static void	check_cmd_access(char *paths[], char *argv)
+static void	check_cmd_access(char *paths[], char *argv, char **env)
 {
 	int		i;
 	char	*c;
@@ -29,7 +29,7 @@ static void	check_cmd_access(char *paths[], char *argv)
 		temp = c;
 		c = ft_strjoin(c, cmd_args[0]);
 		if (access(c, F_OK | X_OK) == 0)
-			execve(c, cmd_args, NULL);
+			execve(c, cmd_args, env);
 		free(c);
 		free(temp);
 		i++;
@@ -44,23 +44,25 @@ static void	retrive_paths(char **env, char *argv)
 {
 	char	*c;
 	char	**paths;
+	char	**tmp;
 
 	c = NULL;
-	while (env && *env)
+	tmp = env;
+	while (tmp && *tmp)
 	{
-		if (ft_strnstr(*env, "PATH", 4))
+		if (ft_strnstr(*tmp, "PATH", 4))
 		{
-			c = ft_strnstr(*env, "PATH", 4);
+			c = ft_strnstr(*tmp, "PATH", 4);
 			break ;
 		}
-		env++;
+		tmp++;
 	}
 	if (c == NULL)
 		ft_putstr_fd("Pipex: There is no $PATH\n", 2);
 	paths = ft_split(c + 5, ':');
 	if (!paths)
 		ft_putstr_fd("Pipex: ft_split failed", 2);
-	check_cmd_access(paths, argv);
+	check_cmd_access(paths, argv, env);
 }
 
 static void	first_child(char **argv, char **env, int *fd)
