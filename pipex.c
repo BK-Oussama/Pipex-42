@@ -6,7 +6,7 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:21:50 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/05/15 19:24:21 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/05/19 12:17:35 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	first_child(char **argv, char **env, int *fd)
 	if (ft_strchr(argv[2], '/') != NULL && access(argv[2], F_OK | X_OK) == 0)
 	{
 		cmd_args = ft_split(argv[2], ' ');
-		execve(cmd_args[0], cmd_args, NULL);
+		execve(cmd_args[0], cmd_args, env);
 	}
 	retrive_paths(env, argv[2]);
 }
@@ -100,7 +100,7 @@ static void	second_child(char **argv, char **env, int *fd)
 	if (ft_strchr(argv[3], '/') != NULL && access(argv[3], F_OK | X_OK) == 0)
 	{
 		cmd_args = ft_split(argv[3], ' ');
-		execve(cmd_args[0], cmd_args, NULL);
+		execve(cmd_args[0], cmd_args, env);
 	}
 	retrive_paths(env, argv[3]);
 }

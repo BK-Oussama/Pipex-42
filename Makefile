@@ -15,10 +15,12 @@ NAME = pipex
 all: $(NAME)
 
 # How to build the executable
-$(NAME): $(SRCs)
-	make -C libft
+$(NAME): $(SRCs) $(Libft)
 	$(CC) $(CFLAGS) $(SRCs) $(Libft) -o $(NAME)
 
+$(Libft):
+	make -s -C libft
+	
 # Target to clean up object files
 clean:
 	rm -f $(NAME)
