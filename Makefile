@@ -2,7 +2,7 @@
 CC = cc
 
 # Define CFLAGS (compiler flags)
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 # Source code files
 SRCs = pipex.c pipex_utils.c 

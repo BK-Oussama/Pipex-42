@@ -6,7 +6,7 @@
 /*   By: ouboukou <ouboukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:21:50 by ouboukou          #+#    #+#             */
-/*   Updated: 2024/06/03 20:45:45 by ouboukou         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:23:22 by ouboukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ static void	retrive_paths(char **env, char *argv)
 		tmp++;
 	}
 	if (c == NULL)
+	{
 		ft_putstr_fd("Pipex: There is no $PATH\n", 2);
+		exit(127);
+	}
 	paths = ft_split(c + 5, ':');
 	if (!paths)
 		ft_putstr_fd("Pipex: ft_split failed", 2);
